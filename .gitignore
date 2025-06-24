@@ -1,0 +1,73 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg
+*.egg-info/
+dist/
+build/
+.env
+.venv/
+venv/
+.env.*
+*.log
+
+# --- Jupyter Notebooks ---
+.ipynb_checkpoints
+
+# --- Docker ---
+*.tar
+*.img
+*.bak
+*.cache
+docker-compose.override.yml
+
+# --- Azure & CLI Artifacts ---
+*.azure/
+azuredeploy.parameters.json
+terraform.tfstate*
+*.bicep.params.json
+.bicep/
+
+# --- Kubernetes & Container Apps ---
+*.kube/
+*.yaml~        # edited backup YAMLs
+*.bak.yaml
+*.bak.bicep
+
+# --- IDE / Editor / System ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# --- Secrets / Auth (Manual Safety) ---
+secrets.json
+*.key
+*.pem
+*.crt
+*.pfx
+
+# --- Sensitive deployment files ---
+infra/spark-containerapp.yaml
+infra/simulator-containerapp.yaml
+infra/*.secrets.yaml
+*.secret.yaml
+
+# --- VSCode devcontainers ---
+.devcontainer/
+
+# --- Build Artifacts ---
+*.zip
+*.tar.gz
+__output__/
+
+# --- Project Output ---
+output/
+checkpoints/
+.parquet/
+*.parquet
+
+# --- Personal / Notes ---
+notes.txt

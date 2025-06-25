@@ -1,9 +1,8 @@
 FROM python:3.10-slim
 
 WORKDIR /app
+COPY ./src /app
 
-COPY generator.py .
-
-RUN pip install azure-eventhub faker
+RUN pip install azure-eventhub
 
 CMD ["python", "generator.py"]

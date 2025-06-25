@@ -50,6 +50,7 @@ secrets.json
 *.pfx
 
 # --- Sensitive deployment files ---
+infra/containerapps/netflix-containerapp.yaml
 infra/spark-containerapp.yaml
 infra/simulator-containerapp.yaml
 infra/*.secrets.yaml

@@ -1,9 +1,22 @@
-# Dockerfile.spark
-
 FROM bitnami/spark:3.5.0
 
 WORKDIR /opt/spark-app
+
+# Copy your Spark job
 COPY ./src/streaming_job.py .
 
-CMD ["/opt/bitnami/spark/bin/spark-submit", "/opt/spark-app/streaming_job.py"]
+# Install curl and download the Kafka connector JARs
+USER root
+RUN install_packages curl && \
+    mkdir -p /opt/spark/jars && \
+    curl -L -o /opt/spark/jars/spark-sql-kafka-0-10_2.12-3.5.0.jar https://repo1.maven.org/maven2/org/apache/spark/spark-sql-kafka-0-10_2.12/3.5.0/spark-sql-kafka-0-10_2.12-3.5.0.jar && \
+    curl -L -o /opt/spark/jars/kafka-clients-3.5.1.jar https://repo1.maven.org/maven2/org/apache/kafka/kafka-clients/3.5.1/kafka-clients-3.5.1.jar && \
+    curl -L -o /opt/spark/jars/spark-token-provider-kafka-0-10_2.12-3.5.0.jar https://repo1.maven.org/maven2/org/apache/spark/spark-token-provider-kafka-0-10_2.12/3.5.0/spark-token-provider-kafka-0-10_2.12-3.5.0.jar
 
+USER 1001
+
+# Set classpath so Spark loads the JARs
+ENV SPARK_EXTRA_CLASSPATH="/opt/spark/jars/*"
+
+# Run the streaming job
+CMD ["/opt/bitnami/spark/bin/spark-submit", "/opt/spark-app/streaming_job.py"]
